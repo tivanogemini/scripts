@@ -27,7 +27,7 @@ envSet(){
 		apt update -y && apt upgrade -y
 		apt install snap -y && apt install jq -y
 		snap install core
-		snap install shadowsocks-libev
+		snap install shadowsocks-libev --dege
 		echo "apt updated,ss installed"
 		atimes=$[atimes+1]
 		echo $atimes > atimes.txt
@@ -104,3 +104,5 @@ main(){
 	confGen
 	servStart
 }
+
+main
