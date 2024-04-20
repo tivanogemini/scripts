@@ -40,12 +40,6 @@ envSet(){
 gatewaySet(){
 	apt remove iptables* -y
 	apt autoremove -y
-	apt install ufw -y
-
-	ufw allow ssh
-	ufw allow $port
-
-	ufw reload
 }
 
 IPinfoGet(){
@@ -63,6 +57,8 @@ IPinfoGet(){
 		isp="Linode"
 	elif [[ "$isp" == *"DigitalOcean"* ]]; then
 		isp="DigitalOcean"
+  	elif [[ "$isp" == *"Amazon"* ]]; then
+		isp="AWS"
 	fi
 
 }
