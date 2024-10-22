@@ -41,12 +41,15 @@ tar -zxvf $(pwd)/udp2raw_binaries.tar.gz
 tar -zxvf $(pwd)/kcptun-linux-amd64-20230214.tar.gz
 tar -zxvf $(pwd)/speederv2_binaries.tar.gz
 
-mv server_linux_amd64 usr/local/bin/kcptun
-mv speederv2_amd64 usr/local/bin/speeder
-mv udp2raw_amd64 usr/local/bin/udp2raw
+mv $(pwd)/server_linux_amd64 usr/local/bin/kcptun
+mv $(pwd)/speederv2_amd64 usr/local/bin/speeder
+mv $(pwd)/udp2raw_amd64 usr/local/bin/udp2raw
 
 mkdir -p /usr/local/etc/kcpser
 
+cat<<EOF>/usr/local/etc/kcpser/config.json
+
+EOF
 
 cat<<EOF>/etc/supervisor/conf.d/game.conf
 [program:kcptun]
