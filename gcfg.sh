@@ -4,6 +4,10 @@ echo "bash script for Game Accelerator develop"
 echo "based on miss lala's blog"
 
 
+home=$(pwd)
+IPv4=$(curl ipinfo.io/ip -s)
+ssPort=$(jq -r '.server_port' /var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.json)
+
 #1. root auth
 
 if [[ $(id -u) -eq 0 ]]; then
@@ -41,15 +45,76 @@ tar -zxvf $(pwd)/udp2raw_binaries.tar.gz
 tar -zxvf $(pwd)/kcptun-linux-amd64-20230214.tar.gz
 tar -zxvf $(pwd)/speederv2_binaries.tar.gz
 
-mv $(pwd)/server_linux_amd64 usr/local/bin/kcptun
-mv $(pwd)/speederv2_amd64 usr/local/bin/speeder
-mv $(pwd)/udp2raw_amd64 usr/local/bin/udp2raw
+mv $(pwd)/server_linux_amd64 /usr/local/bin/kcptun
+mv $(pwd)/speederv2_amd64 /usr/local/bin/speeder
+mv $(pwd)/udp2raw_amd64 /usr/local/bin/udp2raw
 
 mkdir -p /usr/local/etc/kcpser
 
 cat<<EOF>/usr/local/etc/kcpser/config.json
-
+{
+        "smuxver": 2,
+        "listen": ":33666-34690", 
+        "target": "127.0.0.1:2000", 
+        "key": "pubgpubg", 
+        "crypt": "twofish",
+        "mode": "fast3",
+        "mtu": 1400,
+        "sndwnd": 2048,
+        "rcvwnd": 2048,
+        "datashard": 10,
+        "parityshard": 0,
+        "dscp": 0,
+        "nocomp": true,
+        "acknodelay": false,
+        "nodelay": 1,
+        "interval": 20,
+        "resend": 2,
+        "nc": 1,
+        "sockbuf": 16777217,
+        "smuxbuf": 16777217,
+        "streambuf":4194304,
+        "keepalive": 10,
+        "pprof":false,
+        "quiet":false,
+        "tcp":false
+}
 EOF
+
+
+echo "generate kcp-client config:\n"
+
+cat<<EOF>$home/config.json
+{
+        "smuxver": 2,
+        "listen": ":33666-34690", 
+        "target": "$IPv4:$ssPort", 
+        "key": "pubgpubg", 
+        "crypt": "twofish",
+        "mode": "fast3",
+        "mtu": 1400,
+        "sndwnd": 2048,
+        "rcvwnd": 2048,
+        "datashard": 10,
+        "parityshard": 0,
+        "dscp": 0,
+        "nocomp": true,
+        "acknodelay": false,
+        "nodelay": 1,
+        "interval": 20,
+        "resend": 2,
+        "nc": 1,
+        "sockbuf": 16777217,
+        "smuxbuf": 16777217,
+        "streambuf":4194304,
+        "keepalive": 10,
+        "pprof":false,
+        "quiet":false,
+        "tcp":false
+}
+EOF
+
+cat $home/config.json
 
 cat<<EOF>/etc/supervisor/conf.d/game.conf
 [program:kcptun]
