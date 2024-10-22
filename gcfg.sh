@@ -124,7 +124,7 @@ autorestart=true
 redirect_stderr=false
 
 [program:speederv2]
-command=/usr/local/bin/speeder -s -l 0.0.0.0:14001 -r 127.0.0.1:47741 -f 2:4 -k "pubgpubg"
+command=/usr/local/bin/speeder -s -l 0.0.0.0:14001 -r 127.0.0.1:$ssPort -f 2:4 -k "pubgpubg"
 autostart=true
 autorestart=true
 redirect_stderr=false
