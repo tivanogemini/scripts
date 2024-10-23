@@ -55,7 +55,7 @@ cat<<EOF>/usr/local/etc/kcpser/config.json
 {
         "smuxver": 2,
         "listen": ":33666-34690", 
-        "target": "127.0.0.1:2000", 
+        "target": "127.0.0.1:$ssPort", 
         "key": "pubgpubg", 
         "crypt": "twofish",
         "mode": "fast3",
@@ -87,7 +87,7 @@ echo "generate kcp-client config:\n"
 cat<<EOF>$home/config.json
 {
         "smuxver": 2,
-        "listen": ":33666-34690", 
+        "listen": ":33669", 
         "target": "$IPv4:$ssPort", 
         "key": "pubgpubg", 
         "crypt": "twofish",
