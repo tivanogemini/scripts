@@ -1,6 +1,6 @@
 #! /bin/bash
 
-curl -L https://github.com/xtaci/kcptun/releases/download/v20240919/kcptun-linux-amd64-20240919.tar.gz -0 kcp.tar.gz
+curl -L https://github.com/xtaci/kcptun/releases/download/v20240919/kcptun-linux-amd64-20240919.tar.gz -o kcp.tar.gz
 ssPort=$(jq -r '.server_port' /var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.json)
 ipaddr=$(curl -s http://checkip.amazonaws.com)
 
@@ -52,6 +52,8 @@ cat<<EOF>/usr/local/etc/kcpser/cilconf.config
         "quiet":false,
         "tcp":false
 }
+
+EOF
 
 cat<<EOF>/etc/supervisor/conf.d/game.conf
 [program:kcptun]
