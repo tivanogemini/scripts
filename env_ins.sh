@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo ""
+echo "set up enviroment for app install"
 
 apt-update -y
 apt-upgrade -y
