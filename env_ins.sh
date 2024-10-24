@@ -4,7 +4,6 @@ echo ""
 
 apt-update -y
 apt-upgrade -y
-apt remove iptables* -y
 apt autoremove -y
 
 echo "start to install neccessary tool from apt"
