@@ -2,7 +2,7 @@
 
 echo "start to install ss-server"
 
-snap install snap install shadowsocks-libev --edge //ins ss-server
+snap install shadowsocks-libev --edge 
 
 port=$(shuf -i 10000-65536 -n 1)
 passwd=$(openssl rand -base64 16)
