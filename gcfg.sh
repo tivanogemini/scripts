@@ -53,7 +53,6 @@ mkdir -p /usr/local/etc/kcpser
 
 cat<<EOF>/usr/local/etc/kcpser/config.json
 {
-        "smuxver": 2,
         "listen": ":33666-34690", 
         "target": "127.0.0.1:$ssPort", 
         "key": "pubgpubg", 
@@ -66,16 +65,9 @@ cat<<EOF>/usr/local/etc/kcpser/config.json
         "parityshard": 0,
         "dscp": 0,
         "nocomp": true,
-        "acknodelay": false,
-        "nodelay": 1,
         "interval": 20,
-        "resend": 2,
-        "nc": 1,
         "sockbuf": 16777217,
-        "smuxbuf": 16777217,
-        "streambuf":4194304,
         "keepalive": 10,
-        "pprof":false,
         "quiet":false,
         "tcp":false
 }
