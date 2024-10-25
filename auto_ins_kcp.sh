@@ -65,7 +65,7 @@ redirect_stderr=false
 EOF
 
 supervisorctl update
-
+supervisorctl restart all
 
 echo "kcptun has been set on ur device"
 
