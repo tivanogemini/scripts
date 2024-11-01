@@ -80,6 +80,7 @@ servStart(){
 
 	systemctl enable snap.shadowsocks-libev.ss-server-daemon.service
 	systemctl start snap.shadowsocks-libev.ss-server-daemon.service
+ 	systemctl start snap.shadowsocks-libev.ss-server-daemon.service
 
 	echo "service has been started."
 	echo -e "Your IP Address:	$public_ip"
