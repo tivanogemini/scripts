@@ -7,6 +7,9 @@ snap install shadowsocks-libev --edge
 port=$(shuf -i 10000-65536 -n 1)
 passwd=$(openssl rand -base64 16)
 public_ip=$(curl -s http://checkip.amazonaws.com)
+ipinfo_data=$(curl -s http://ipinfo.io/$public_ip/json)
+country=$(jq -r '.country' <<< "$ipinfo_data")
+isp=$(jq -r '.org' <<< "$ipinfo_data")
 
 cat<<EOF>/var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.json
 {
